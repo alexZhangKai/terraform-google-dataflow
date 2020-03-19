@@ -28,11 +28,6 @@ variable "template_gcs_path" {
   description = "The GCS path to the Dataflow job template."
 }
 
-variable "temp_gcs_location" {
-  type        = string
-  description = "A writeable location on GCS for the Dataflow job to dump its temporary data."
-}
-
 variable "parameters" {
   type        = map(string)
   description = "Key/Value pairs to be passed to the Dataflow job (as used in the template)."
@@ -89,7 +84,7 @@ variable "machine_type" {
 
 variable "ip_configuration" {
   type        = string
-  description = "The configuration for VM IPs. Options are 'WORKER_IP_PUBLIC' or 'WORKER_IP_PRIVATE'." 
+  description = "The configuration for VM IPs. Options are 'WORKER_IP_PUBLIC' or 'WORKER_IP_PRIVATE'."
   default     = null
 }
 

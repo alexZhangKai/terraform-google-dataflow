@@ -22,7 +22,7 @@ resource "google_dataflow_job" "dataflow_job" {
   on_delete             = var.on_delete
   max_workers           = var.max_workers
   template_gcs_path     = var.template_gcs_path
-  temp_gcs_location     = "gs://${var.temp_gcs_location}/tmp_dir"
+  temp_gcs_location     = module.temp_bucket.url
   parameters            = var.parameters
   service_account_email = var.service_account_email
   network               = replace(var.network_self_link, "/(.*)/networks/(.*)/", "$2")
@@ -35,3 +35,9 @@ resource "google_dataflow_job" "dataflow_job" {
   ip_configuration = var.ip_configuration
 }
 
+module "temp_bucket" {
+  source     = "./modules/dataflow_bucket"
+  project_id = var.project_id
+  region     = substr(var.zone, 0, length(var.zone) - 2)
+  name       = "tmp-dataflow-${var.name}"
+}

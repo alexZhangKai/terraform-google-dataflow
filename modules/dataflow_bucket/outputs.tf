@@ -24,3 +24,8 @@ output "region" {
   value       = var.region
 }
 
+output "url" {
+  description = "The bucket's url"
+  value       = google_storage_bucket.tmp_dir_bucket
+}
+
